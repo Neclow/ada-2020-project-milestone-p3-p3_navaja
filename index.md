@@ -7,13 +7,14 @@ A civil war is defined as a conflict between different groups of a single state 
 Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). In 2015, Muchlinski _et al._ published a paper _Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data_. They used Random Forests to try predicting rare events in conflict data more accurately. 
 In this project, we first aim at benchmarking these results against other common machine learning algorithms, namely neural networks and gradient boosted trees. As the geographical area was an important feature in the abovementioned study ("Western Europe and US Dummy" in Fig. 4 [[5]](#5)), we will examine whether predictions differ when training separate models for each continent or subregion. Finally, we will explore whether civil war events can be forecast as time series instead of simple regression points, e.g., using autoregressive models.
 
-# Comparing machine learning algorithms for civil war onset classification.
+# Stretching the limits of previous analysis 
+## Comparing machine learning algorithms for civil war onset classification.
 Using the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g.,  "Western Europe and US Dummy"). Indeed, we will investigate the effect of data aggregation by continent/subregion in a subsequent analysis (cf. **4.2**). To ensure a meaningful comparison, the same training and testing sets will be used to assess each tested algorithm.
 
-# Effect of spatial data separation
+## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
 
- # Predicting civil war onset as time series forecasting
+ ## Predicting civil war onset as time series forecasting
 In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
 
 
