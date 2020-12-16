@@ -19,25 +19,25 @@ Once the dataset cleaned, we started the analysis.
 In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis (cf. **4.2**). To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
 ### Defining the models
 Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). 
-* Multi-layer perceptrons is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
-* XGBoost uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
+* **Multi-layer perceptrons** is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
+* **XGBoost** uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
 ### Evaluating the performance of the models
 For each model, we performed hyperparameter optimization through cross-validated grid-search. Model performance was then evaluated on 15% of the dataset using three metrics: ROC-AUC and F1 scores as in Muchlinski et al. [[5]](#5), and also the area under the precision-recall curve (PR-AUC). Although normally suited for binary classification, the receiver operating characteristic (ROC) curve (Sensitivity vs. 1 - Specificity) is less informative for imbalanced problems with a few positive examples [[6]](#6). Indeed, while recall is equivalent to sensitivity, specificity cannot capture data skew as well as precision.
 2 hyperparameters were tuned for each model:
 We tuned 2 hyperparameters for each model:
  * Random Forests:
-     * _max_features_: the number of features to consider to build the tree splits --> either $\sqrt D$ or $\log(D)$, with $D$ the number of features.
-     * _max_samples_: the number of samples to draw from the feature matrix to build each tree --> either two-thirds or the entirety of the $N$ samples
+     * _max_features_: the number of features to consider to build the tree splits, namely either <img src="https://render.githubusercontent.com/render/math?math=\sqrt D"> or <img src="https://render.githubusercontent.com/render/math?math=\log(D)">, with <img src="https://render.githubusercontent.com/render/math?math=D"> the number of features.
+     * _max_samples_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
   
  * XGBoost:
-     * _max_depth_: maximum depth of a tree --> either 3, 6 (default) or 9
-     * _subsample_: the number of samples to draw from the feature matrix to build each tree --> either two-thirds or the entirety of the $N$ samples
+     * _max_depth_: maximum depth of a tree, namely either 3, 6 (default) or 9
+     * _subsample_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
   
  * Multi-layer perceptron:
-     * _alpha_: the amount of $L_2$ regularization
-     * _hidden_layer_sizes_: the number of hidden layers --> either 4 or 8 (the width of the hidden layers was set to the number of features)
+     * _alpha_: the amount of <img src="https://render.githubusercontent.com/render/math?math=L_2"> regularization
+     * _hidden_layer_sizes_: the number of hidden layers, namely either 4 or 8 (the width of the hidden layers was set to the number of features)
 
-As the data is heavily imbalanced (approximate positive-negative ratio = $1:100$), downsampling of the majority class was performed. The sampling strategy was also optimized through grid search as different positive-negative ratios were explored ($1:7$, $1:3$ and $1:1$).
+As the data is heavily imbalanced (approximate positive-negative ratio = 1:100), downsampling of the majority class was performed. The sampling strategy was also optimized through grid search as different positive-negative ratios were explored (1:7, 1:3 and 1:1).
 
 ### Result analysis 
 
