@@ -1,6 +1,8 @@
 <img src="images/banner.png" alt="hi" class="inline"/>
 
-* {:toc}
+* TOC {:toc}
+n°2
+{:toc}
 
 # What's at stake
 A civil war is defined as a conflict between different groups of a single state or country. Such wars can have serious repercussions like resources´ consumption, crowd movement, or destruction of infrastructures. Besides, most of these conflicts imply international intervention -they represented two thirds of the 138 intrastate conflicts between the end of World War II and 2000 [[1]](#1). Thereby, understanding the dynamics leading to these rare events happens to be crucial. It would allow to anticipate and even to prevent civil wars in the years to come.  
