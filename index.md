@@ -44,21 +44,21 @@ As the data is heavily imbalanced (approximate positive-negative ratio = 1:100),
 
 ### Result analysis 
 
-<img src="images/confmat.png" alt="hi" class="inline"/>
-
 Looking at the ROC-AUC results, it seems that the implemented multi-layer perceptron (MLP) performed worse than tree-based methods, as both Random Forests and XGBoost achieved similar scores.
 That said, F1 and PR-AUC scores tell a different story with respect to Random Forests' predictive ability. Looking at these metrics, it seems XGBoost was far more robust at predicting civil events than Random Forest. The confusion matrices plotted above confirm this observation, as XGBoost was able to correctly classify 15 out of 20 civil war events, while Random Forests and MLP respectively predicted 9 and 5 civil war events.
 Concerning the tree-based methods, these observations are in accord with corrections of Muchlinski et al. [[5]](#5)'s findings by Wang [[7]](#7), who found a substantial difference in PR-AUC between Random Forests and gradient boosted trees (such as XGBoost) on a similar dataset.
 Overall, XGBoost was the best model for this task. In addition to its sheer rapidity, this algorithm has become increasingly popular for its performance in a variety of machine learning challenges [[8]](#8)[[9]](#9).
 
-<img src="images/PIs.png" alt="hi" class="inline"/>
+  ![](images/compare.png)
+  ***Figure 1.** Here you can see the permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
 
 Feature importance was evaluated via **permutation importance**, which evaluates the mean decrease in a given metric (here, average precision) when permuting the feature values.
 In the figures above, we observe that the tree-based decision methods (Random Forests and XGBoost) have similar feature importances. In particular, primary commodity export features, exports of goods and services, fuel exports, the relative amount of trade and the relative amount of military manpower are the top-6 features in both models.
 Contrary to the mean decrease in Gini score, this method is robust to feature cardinality. Hence, it is not surprising to observe that some political indicators (e.g., the Polity index or a dummy variable describing whether the state is semi-federal) that were surprisingly absent in Muchlinski et al.'s model [5] are present in the most important features of Random Forests and XGBoost. In spite of this, both methods share a fair amount of important variables with those of Muchlinski et al.'s model [5] (e.g., primary commodity export features, trade, military power, infant mortality, illiteracy).
 On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
 
-<img src="images/ML_algos_barplot.png" alt="hi" class="inline"/>
+![](images/ML_algos_barplot.png)
+  ***Figure 2.** Here you can see the comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)*
 
 ## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
