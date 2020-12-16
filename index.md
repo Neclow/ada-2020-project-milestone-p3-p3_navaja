@@ -15,12 +15,15 @@ Before diving into the analysis, we first cleaned and organized the dataset. The
 A necessary cleaning step for our analysis was to correct the geographical dummy variables. These variables describe whether a country is in a given geographical area or not. For the data of the year 2000, their values suddenly differed from the previous years. Therefore, we simply corrected them by imputing the same values as the previous year.
 Once the dataset cleaned, we started the analysis.
 
+
 ## Comparing machine learning algorithms for civil war onset classification.
 In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis. To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
+
 ### Defining the models
 Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). 
 * **Multi-layer perceptrons** is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
 * **XGBoost** uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
+
 ### Evaluating the performance of the models
 For each model, we performed hyperparameter optimization through cross-validated grid-search. Model performance was then evaluated on 15% of the dataset using three metrics: ROC-AUC and F1 scores as in Muchlinski et al. [[5]](#5), and also the area under the precision-recall curve (PR-AUC). Although normally suited for binary classification, the receiver operating characteristic (ROC) curve (Sensitivity vs. 1 - Specificity) is less informative for imbalanced problems with a few positive examples [[6]](#6). Indeed, while recall is equivalent to sensitivity, specificity cannot capture data skew as well as precision.
 2 hyperparameters were tuned for each model:
