@@ -57,8 +57,11 @@ In the figures above, we observe that the tree-based decision methods (Random Fo
 Contrary to the mean decrease in Gini score, this method is robust to feature cardinality. Hence, it is not surprising to observe that some political indicators (e.g., the Polity index or a dummy variable describing whether the state is semi-federal) that were surprisingly absent in Muchlinski et al.'s model [5] are present in the most important features of Random Forests and XGBoost. In spite of this, both methods share a fair amount of important variables with those of Muchlinski et al.'s model [5] (e.g., primary commodity export features, trade, military power, infant mortality, illiteracy).
 On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
 
-![](images/ML_algos_barplot.png)
-  ***Figure 2.** Here you can see the comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)*
+<p align="center">
+ <img width="460" height="300" src="images/ML_algos_barplot.png">
+</p>
+
+***Figure 2.*** _Here you can see the comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
 
 ## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
