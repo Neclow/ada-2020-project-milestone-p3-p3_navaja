@@ -1,7 +1,5 @@
 <img src="images/banner.png" alt="hi" class="inline"/>
 
-* TOC {:toc}
-{:toc}
 * {:toc}
 
 # What's at stake
