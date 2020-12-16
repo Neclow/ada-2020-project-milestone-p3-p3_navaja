@@ -16,7 +16,7 @@ A necessary cleaning step for our analysis was to correct the geographical dummy
 Once the dataset cleaned, we started the analysis.
 
 ## Comparing machine learning algorithms for civil war onset classification.
-In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis (cf. **4.2**). To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
+In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis. To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
 ### Defining the models
 Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). 
 * **Multi-layer perceptrons** is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
@@ -25,15 +25,15 @@ Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Ra
 For each model, we performed hyperparameter optimization through cross-validated grid-search. Model performance was then evaluated on 15% of the dataset using three metrics: ROC-AUC and F1 scores as in Muchlinski et al. [[5]](#5), and also the area under the precision-recall curve (PR-AUC). Although normally suited for binary classification, the receiver operating characteristic (ROC) curve (Sensitivity vs. 1 - Specificity) is less informative for imbalanced problems with a few positive examples [[6]](#6). Indeed, while recall is equivalent to sensitivity, specificity cannot capture data skew as well as precision.
 2 hyperparameters were tuned for each model:
 We tuned 2 hyperparameters for each model:
- * Random Forests:
+ * **Random Forests**:
      * _max_features_: the number of features to consider to build the tree splits, namely either <img src="https://render.githubusercontent.com/render/math?math=\sqrt D"> or <img src="https://render.githubusercontent.com/render/math?math=\log(D)">, with <img src="https://render.githubusercontent.com/render/math?math=D"> the number of features.
      * _max_samples_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
   
- * XGBoost:
+ * **XGBoost**:
      * _max_depth_: maximum depth of a tree, namely either 3, 6 (default) or 9
      * _subsample_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
   
- * Multi-layer perceptron:
+ * **Multi-layer perceptron**:
      * _alpha_: the amount of <img src="https://render.githubusercontent.com/render/math?math=L_2"> regularization
      * _hidden_layer_sizes_: the number of hidden layers, namely either 4 or 8 (the width of the hidden layers was set to the number of features)
 
