@@ -1,3 +1,6 @@
+<link href="css/image-zoom.css" rel="stylesheet">
+<script src="js/image-zoom.js"></script>
+
 <img src="images/banner.png" alt="hi" class="inline"/>
 
 * TOC {:toc}
@@ -60,7 +63,7 @@ Contrary to the mean decrease in Gini score, this method is robust to feature ca
 On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
 
 <p align="center">
- <img width="460" height="300" src="images/ML_algos_barplot.png">
+ <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
 </p>
 
 ***Figure 2.*** _Here you can see the comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
@@ -71,11 +74,23 @@ Thus, in this step, we explore whether spatial separation of civil war data (i.e
 
 One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset. With that in mind, we decided to discard this region from this part. On top of this machine learning-driven explanation, this decision is also motivated when looking at economic, social and political indicators. In particular, we selected the five most important features from XGBoost in the previous section, and compared bootstrapped 95% confidence intervals around the mean of these features for each geographical area. We can see that some of the variables are substantially different for Western Europe and US countries, especially primary commodity and fuel exports.
 
+
+<p align="center">
+ <img src="images/features.png" data-zoom-image>
+</p>
+
+***Figure 3.*** _Here we compare parameters that best explained the probability for a civil war onset for different world subregions_
+
   ![](images/features.png)
   ***Figure 3.** Here we compare parameters that best explained the probability for a civil war onset for different world subregions*
   
 After discarding Western Europe & US data, we fitted XGBoost on each of them using the same procedure as in the first section.
 
+<p align="center">
+ <img src="images/geoPIs.png" data-zoom-image>
+</p>
+
+***Figure 4.*** _Here you can see the permutation importances for different subregions and the PR-AUC, ROC-AUC and F1-scores for each subregions_
 
   ![](images/geoPIs.png)
   ***Figure 4.** Here you can see the permutation importances for different subregions and the PR-AUC, ROC-AUC and F1-scores for each subregions*
