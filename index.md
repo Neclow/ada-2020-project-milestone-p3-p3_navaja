@@ -65,6 +65,10 @@ On the other hand, the multi-layer perceptron captures a lot more political indi
 
 ## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
+Thus, in this step, we explore whether spatial separation of civil war data (i.e., by continent or subregion) can help improve predictive accuracy of civil war events. To do so, we split the datasets according to the dummy variables, and fit a XGBoost classifier for each subset. Once again, cross-validated grid-search is used to optimize hyperparameters using the training set before evaluation on the test set.
+
+One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset. With that in mind, we decided to discard this region from this part. On top of this machine learning-driven explanation, this decision is also motivated when looking at economic, social and political indicators. In particular, we selected the five most important features from XGBoost in the previous section, and compared bootstrapped 95% confidence intervals around the mean of these features for each geographical area. We can see that some of the variables are substantially different for Western Europe and US countries, especially primary commodity and fuel exports.
+
 
  ## Predicting civil war onset as time series forecasting
 In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
