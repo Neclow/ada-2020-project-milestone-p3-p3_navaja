@@ -69,6 +69,34 @@ Thus, in this step, we explore whether spatial separation of civil war data (i.e
 
 One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset. With that in mind, we decided to discard this region from this part. On top of this machine learning-driven explanation, this decision is also motivated when looking at economic, social and political indicators. In particular, we selected the five most important features from XGBoost in the previous section, and compared bootstrapped 95% confidence intervals around the mean of these features for each geographical area. We can see that some of the variables are substantially different for Western Europe and US countries, especially primary commodity and fuel exports.
 
+  ![](images/features.png)
+  ***Figure 3.** Here we compare parameters that best explained the probability for a civil war onset for different world subregions*
+  
+After discarding Western Europe & US data, we fitted XGBoost on each of them using the same procedure as in the first section.
+
+
+  ![](images/geoPIs.png)
+  ***Figure 4.** Here you can see the permutation importances for different subregions and the PR-AUC, ROC-AUC and F1-scores for each subregions*
+  
+  * After data separation by geographical area, the results datasets are much smaller. As a consequence, the testing sets only contain a handful of positive examples (1 to 5). Thus, we decided to evaluate PR-AUC, ROC-AUC and F1 scores over 5 different train-test splits to minimize "lucky" or "unlucky" examples in the test sets.
+ 
+ * The results for Sub-Saharan Africa, Middle East and North Africa and Eastern Europe and Central Asia are somewhat similar to the performance of XGBoost in Step 1 on the whole dataset, especially when looking at ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower ($0.45$-$0.5$) than observed in Step 1 ($0.54$).
+ 
+ * The classifiers of civil war events in Latin America and South and East Asia and Oceania performed much worse. For the latter, PR-AUC, ROC-AUC and F1 values resemble the ones obtained when training the multi-layer perceptron in Step 1.
+ 
+ * Interestingly, the important predictors of civil war onset differed staggeringly over the different geographical areas:
+      * In **Eastern Europe and Central Asia**, the three most important features were "Exports of goods & servies as % of GDP", "Years since last regime transition since 1949" and "Annual change in modified polity". The last two variables echo with the fact many countries in these areas were either under the Soviet yoke (e.g., Romania, Afghanistan), and/or also governed by authoritarian regimes nowadays (e.g., Tajikistan, Kazakhstan)
+      
+      * In **Middle East and North Africa (MENA)**, two trade-related features stood out: "Trade as % of GDP" and "% Annual change in GDP". This observation is consistent with the previous feature bar plots as MENA had the highest country-averaged trade-to-GDP ratio. One can also notice the importance of fuel and oil exports (4th), which are vital to the economy of numerous countries in this region (Saudi Arabia, Iraq, and UAE are among the top-5 countries in terms of crude oil exports [11]).
+      * In **South and East Asia and Oceania**, the three most important features were "% adult population illiterate", "Fuel and oil product exports as % of merchandise exports" and "neighbors' average ln(GDP per capita)". Although not visible in the bar plot, the fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [12], and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962). As a rapidly developing region during the second half of the century, it is possible that literacy rates and GDP per capita measurements somehow correlated with civil war onset as most of which occurred soon after the Second World War.
+      
+      * In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. The first feature heavily contrasts with feature importances in the other regions. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [13]. 
+      
+      * In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [3,14].
+ 
+ * All the same, it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
+
+ * While possibly contradicting with the results of Muchlinski et al. [5], who found that the US and Western Europe Dummy was an important feature of their Random Forests, this result seems coherent when looking at the mutual information between the different features and the response variable. Indeed, some geographical dummy variables (e.g., geo2 and geo57) are among the variables with the least mutual information with the response variable, meaning that they contain close to no information about civil war onset.
 
  ## Predicting civil war onset as time series forecasting
 In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
