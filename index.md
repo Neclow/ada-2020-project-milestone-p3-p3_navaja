@@ -6,8 +6,12 @@ n°2
 A civil war is defined as a conflict between different groups of a single state or country. Such wars can have serious repercussions like resources´ consumption, crowd movement, or destruction of infrastructures. Besides, most of these conflicts imply international intervention -they represented two thirds of the 138 intrastate conflicts between the end of World War II and 2000 [[1]](#1). Thereby, understanding the dynamics leading to these rare events happens to be crucial. It would allow to anticipate and even to prevent civil wars in the years to come.  
 
 # What has already been done to predict civil war onset 
-Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). In 2015, Muchlinski _et al._ published a paper _Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data_. They used Random Forests to try predicting rare events in conflict data more accurately. 
-In this project, we first aim at benchmarking these results against other common machine learning algorithms, namely neural networks and gradient boosted trees. As the geographical area was an important feature in the abovementioned study ("Western Europe and US Dummy" in Fig. 4 [[5]](#5)), we will examine whether predictions differ when training separate models for each continent or subregion. Finally, we will explore whether civil war events can be forecast as time series instead of simple regression points, e.g., using autoregressive models.
+Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5)) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. This project aims at extending the latter findings by investigating the following questions:
+
+ * How does Muchlinski et al.'s model compare with **Multi-Layer Perceptrons** (MLPs) and **Gradient Boosted Trees**, two other popular ML algorithms?
+ * To what extent do feature importances vary when training separate models for geographically-split datasets?
+ * Can civil war onset prediction be performed as a time-series forecasting problem?
+
 
 # Zoom in on the dataset, Civil War Data
 The Civil War Data gathers annual measurements of many features for each recognized country in the world from 1945 to 2000 [[4]](#4). 
