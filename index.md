@@ -9,6 +9,13 @@ A civil war is defined as a conflict between different groups of a single state 
 Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). In 2015, Muchlinski _et al._ published a paper _Comparing Random Forest with Logistic Regression for Predicting Class-Imbalanced Civil War Onset Data_. They used Random Forests to try predicting rare events in conflict data more accurately. 
 In this project, we first aim at benchmarking these results against other common machine learning algorithms, namely neural networks and gradient boosted trees. As the geographical area was an important feature in the abovementioned study ("Western Europe and US Dummy" in Fig. 4 [[5]](#5)), we will examine whether predictions differ when training separate models for each continent or subregion. Finally, we will explore whether civil war events can be forecast as time series instead of simple regression points, e.g., using autoregressive models.
 
+# Zoom in on the dataset, Civil War Data
+The Civil War Data gathers annual measurements of many features for each recognized country in the world from 1945 to 2000 [[4]](#4). 
+
+The predictive variables notably include the type of government of the country, ethnic, linguistics, and religious indices, importation and exportation information, infant mortality, the rate of illiteracy, life expectancy, the situation in neighboring countries, topology and geographical information. 
+
+As for the dependent variable, it consists in a binary measure indicating whether a civil war onset occurred for a given country in a given year. 
+
 # Stretching the limits of previous analysis 
 ## Data wrangling
 Before diving into the analysis, we first cleaned and organized the dataset. The latter is in civil war data (CWD), which consists in many features measured annually for each recognized country in the world from 1945 to 2000 [[4]](#4). We loaded the 88 variables indicated by Muchlinski et al. [5] together with the response variable (1 if a civil war event occured in a given country-year, 0 otherwise) and columns with country-year information, and cleaned the resulting dataset for the rest of the notebook.
@@ -53,7 +60,7 @@ Overall, XGBoost was the best model for this task. In addition to its sheer rapi
    <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
 
-***Figure 1.*** _Here you can see the comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
+***Figure 1.*** _Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
 
 Feature importance was evaluated via **permutation importance**, which evaluates the mean decrease in a given metric (here, average precision) when permuting the feature values.
 In the figures above, we observe that the tree-based decision methods (Random Forests and XGBoost) have similar feature importances. In particular, primary commodity export features, exports of goods and services, fuel exports, the relative amount of trade and the relative amount of military manpower are the top-6 features in both models.
@@ -61,7 +68,7 @@ Contrary to the mean decrease in Gini score, this method is robust to feature ca
 On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
 
   ![](images/compare.png)
-  ***Figure 2.** Here you can see the permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
+  ***Figure 2.** Permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
 
 ## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
@@ -74,7 +81,7 @@ One limit of this analysis is that only one civil war event was reported in West
  <img src="images/features.png" data-zoom-image>
 </p>
 
-***Figure 3.*** _Here we compare parameters that best explained the probability for a civil war onset for different world subregions_
+***Figure 3.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
 
 After discarding Western Europe & US data, we fitted XGBoost on each of them using the same procedure as in the first section.
 
@@ -82,18 +89,18 @@ After discarding Western Europe & US data, we fitted XGBoost on each of them usi
  <img src="images/geo_PIs.png" data-zoom-image>
 </p>
 
-***Figure 4.*** _Here you can see the permutation importances for different subregions_
+***Figure 4.*** _Permutation importances for different subregions_
 
 <p align="center">
  <img src="images/geo_scores.png" data-zoom-image>
 </p>
 
-***Figure 5.*** _Here you can see the PR-AUC, ROC-AUC and F1-scores for different subregions_
+***Figure 5.*** _PR-AUC, ROC-AUC and F1-scores for different subregions_
 
 
   * After data separation by geographical area, the results datasets are much smaller. As a consequence, the testing sets only contain a handful of positive examples (1 to 5). Thus, we decided to evaluate PR-AUC, ROC-AUC and F1 scores over 5 different train-test splits to minimize "lucky" or "unlucky" examples in the test sets.
  
- * The results for Sub-Saharan Africa, Middle East and North Africa and Eastern Europe and Central Asia are somewhat similar to the performance of XGBoost in Step 1 on the whole dataset, especially when looking at ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower ($0.45$-$0.5$) than observed in Step 1 ($0.54$).
+ * The results for Sub-Saharan Africa, Middle East and North Africa and Eastern Europe and Central Asia are somewhat similar to the performance of XGBoost in Step 1 on the whole dataset, especially when looking at ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5) than observed in Step 1 (0.54).
  
  * The classifiers of civil war events in Latin America and South and East Asia and Oceania performed much worse. For the latter, PR-AUC, ROC-AUC and F1 values resemble the ones obtained when training the multi-layer perceptron in Step 1.
  
@@ -103,12 +110,13 @@ After discarding Western Europe & US data, we fitted XGBoost on each of them usi
       * In **South and East Asia and Oceania**, the three most important features were "% adult population illiterate", "Fuel and oil product exports as % of merchandise exports" and "neighbors' average ln(GDP per capita)". Although not visible in the bar plot, the fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [12], and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962). As a rapidly developing region during the second half of the century, it is possible that literacy rates and GDP per capita measurements somehow correlated with civil war onset as most of which occurred soon after the Second World War.
       * In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. The first feature heavily contrasts with feature importances in the other regions. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [13]. 
       * In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [3,14].
+
  
  * All the same, it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
 
  * While possibly contradicting with the results of Muchlinski et al. [5], who found that the US and Western Europe Dummy was an important feature of their Random Forests, this result seems coherent when looking at the mutual information between the different features and the response variable. Indeed, some geographical dummy variables (e.g., geo2 and geo57) are among the variables with the least mutual information with the response variable, meaning that they contain close to no information about civil war onset.
 
- ## Predicting civil war onset as time series forecasting
+## Predicting civil war onset as time series forecasting
 In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
 
 
