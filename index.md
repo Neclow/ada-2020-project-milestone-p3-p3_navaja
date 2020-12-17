@@ -75,7 +75,7 @@ On the other hand, the MLP captured a lot more political indicators in its most 
   ![](images/compare.png)
   *Permutation importances of the three tested models (MLP, XGBoost and Random Forests)*
 
-# Analysis 2: Predicting civil war in different geographical areas
+# 2. Predicting civil war in different geographical areas
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by different subregions and to see whether predictive accuracy differs when fitting the models separately on each group.
 
 In particular, the following geoscheme was used:
@@ -89,6 +89,12 @@ In particular, the following geoscheme was used:
 One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset.
 
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
+
+<p align="center">
+ <img src="images/features.png" data-zoom-image>
+</p>
+
+***Figure 4.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
 
 <p align="center">
  <img src="images/geo_PIs.png" data-zoom-image>
@@ -122,8 +128,28 @@ Beyond that, an interesting result was that feature importance differed staggeri
  
 **Conclusion:** it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
 
-## Predicting civil war onset as time series forecasting
-In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
+# 3. Can civil war onset be forecast?
+In this section, we will consider that each country is assigned to a time series of civil war/peace events, and see whether civil war events could be forecast given past data using simple time forecasting models.
+
+Three common techniques are usually employed to study time series:
+
+* **Recurrent neural networks** (RNNs) have become incresingly popular with the deep learning revolution, and have shown tremendous performance in speech recognition or machine translation. Nonetheless, such neural networks generally require a lot of data to be able to avoid overfitting and output robust predictions.
+* **Autoregression** and **Hidden Markov Models** (HMMs) are also popular for analyzing time series data. To our best knowledge, they are however not well suited to forecast rare events such as civil war onset.
+
+With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country $c$, we aim at classifying events at year $t$ $y_{t,c}$ given features from previous years $X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}$. We splitted the dataset for each country, and created sequences of $N$ years for countries with more than $2N$ years of existence. In this project, we assumed that $N = 5$ years should be the maximal delay to explain civil war onset at a given year.
+
+## Preparing the dataset
+For this task, we splitted the dataset for each country, and created sequences of $N$ years for countries with more than $2N$ years of existence. In this project, we assumed that a delay of $N = 5$ years should be the maximal delay to explain civil war onset at a given year.
+
+## Results
+
+When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with $N = 1$, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
+
+<span style="color: red;">insert image here</span>
+
+Overall, these results remain arguably worse than during the two previous steps. In fairness, this problem is also conceptually harder. Indeed, many civil war events are not continuous processes, but rather tend to spark spontaneously. For instance, the Arab Spring suddenly triggered several uprisings in Syria, Libya and Egypt in 2011 [10].
+
+**Conclusion:** Time-series forecasting of civil war onset with this data was unsuccessful. Further research for this task could be performed with larger datasets to be able to harness the power of RNNs.
 
 
 ## References
@@ -144,42 +170,3 @@ In this section, we considered that each subregion is assigned to a time series 
 <a id="8">[8]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In NIPS 2014 workshop on high-energy physics and machine learning (pp. 69-80).
 
 <a id="9">[9]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
-
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/Neclow/ada-2020-project-milestone-p3-p3_navaja/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Neclow/ada-2020-project-milestone-p3-p3_navaja/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
-"c"
