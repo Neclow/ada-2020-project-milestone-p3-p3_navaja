@@ -2,99 +2,99 @@
 n°2
 {:toc}
 
-# What's at stake
-A civil war is defined as a conflict between different groups of a single state or country. Such wars can have serious repercussions like resources´ consumption, crowd movement, or destruction of infrastructures. Besides, most of these conflicts imply international intervention -they represented two thirds of the 138 intrastate conflicts between the end of World War II and 2000 [[1]](#1). Thereby, understanding the dynamics leading to these rare events happens to be crucial. It would allow to anticipate and even to prevent civil wars in the years to come.  
+# What's at stake?
+In the wake of World War II, the world has seen a steady increase in **civil wars**, often with dire consequences for the affected states. Thereby, understanding the dynamics leading to such conflicts has become a burning topic for data scientists. Indeed, being able to predict civil war onset could be crucial in allow to anticipate or prevent these devastating events.
 
-# What has already been done to predict civil war onset 
-Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5)) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. This project aims at extending the latter findings by investigating the following questions:
+# What has been done?
+Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5)) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. In this project, we extended the latter findings by investigating the following questions:
 
- * How does Muchlinski et al.'s model compare with **Multi-Layer Perceptrons** (MLPs) and **Gradient Boosted Trees**, two other popular ML algorithms?
- * To what extent do feature importances vary when training separate models for geographically-split datasets?
+ * How does Muchlinski et al.'s model compare with other popular ML algorithms?
+ * How does civil war prediction vary when training separate models for geographically-split datasets?
  * Can civil war onset prediction be performed as a time-series forecasting problem?
 
 
-# Zoom in on the dataset, Civil War Data
-The Civil War Data gathers annual measurements of many features for each recognized country in the world from 1945 to 2000 [[4]](#4). 
+# About the dataset
+The Civil War Data comprises annual measurements for each recognized country from 1945 to 2000 [[4]](#4). These notably include features about:
+ * **Politics**: type of government, democracy indices...
+ * **Economy**: GDP growth and per capita, 
+ * **Socio-cultural development**: literacy rate, life expectancy, religious diversity indices... 
+ * **Geography**: in which region the country is located, how rough is its terrain
+In total, our dataset has **7140** "country-years",  **88** features and **1** response variable, which consists in a binary indicator of civil war onset (1 = civil war, 0 otherwise). Importantly, the data is <span style="color: red;">heavily</span> imbalanced, as civil war onset approximately occurred **1%** of the time! 
+ 
+# Analysis 1: Comparing machine learning algorithms for civil war onset classification
+As mentioned previously, Muchlinski et al. [[5]](#5) achieved groundbreaking results with this dataset using **Random Forests**. In this section, we benchmarked these results against two widely used ML algorithms: **multi-layer perceptrons** (MLPs) and **XGBoost**, an _extreme_ gradient boosted tree-based model. As we intend to study geographical separation later, we will here work without the 6 location-related variables.
 
-The predictive variables notably include the type of government of the country, ethnic, linguistics, and religious indices, importation and exportation information, infant mortality, the rate of illiteracy, life expectancy, the situation in neighboring countries, topology and geographical information. 
+## Quick recap: of artificial neurons and (boosted) trees
+* As the name suggests, **Multi-layer perceptrons** are feedforward articifial neural networks with one or several _hidden_ layers between an *input* layer and an *output* layer. The use of hidden layers make neural networks very powerful, as they can solve problems that are not linearly separable.
 
-As for the dependent variable, it consists in a binary measure indicating whether a civil war onset occurred for a given country in a given year. 
+* **Random Forests** (RFs) and **XGBoost** both use collections of _decision trees_ to perform predictions. They can be viewed as crowdsourcing  algorithms, as they combine the results of weak trees to make _oak-solid_ predictions.
 
-# Stretching the limits of previous analysis 
-## Data wrangling
-Before diving into the analysis, we first cleaned and organized the dataset. The latter is in civil war data (CWD), which consists in many features measured annually for each recognized country in the world from 1945 to 2000 [[4]](#4). We loaded the 88 variables indicated by Muchlinski et al. [5] together with the response variable (1 if a civil war event occured in a given country-year, 0 otherwise) and columns with country-year information, and cleaned the resulting dataset for the rest of the notebook.
-A necessary cleaning step for our analysis was to correct the geographical dummy variables. These variables describe whether a country is in a given geographical area or not. For the data of the year 2000, their values suddenly differed from the previous years. Therefore, we simply corrected them by imputing the same values as the previous year.
-Once the dataset cleaned, we started the analysis.
-
-
-## Comparing machine learning algorithms for civil war onset classification.
-In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis. To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
-
-### Defining the models
-Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). A detailed diagram of the three models can be found below.
-* **Multi-layer perceptrons** is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
-* **Random Forests** is a learning method used for classification. It consists of constructing decision trees at training time and outputting the class that is the average prediction (regression) of the individual treesIt grows a forest of decision trees to the data. Since it allows generating correct predictions of rare events even in extremely imbalanced data, it is relevant to test this method for predicting civil war onsets. 
-* **XGBoost** uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
+* On top of that, **XGBoost** relies on *gradient boosting*: here, the trees are trained <u>sequentially</u> instead of <u>independently</u> (like in RFs). In addition to its sheer rapidity, this algorithm has become increasingly popular for its performance in a variety of machine learning challenges [[8]](#8)[[9]](#9).
 
   <p align="center">
    <img src="images/models.png" data-zoom-image>
   </p>
 
-***Figure 1.*** _Illustration of Multi-layer perceptrons, Random Forests and Gradient Boosting algorithm (XGBoost)_
+## Training & Testing
+To ensure a fair comparison, we compared the three algorithms with the same datasets: **85%** of the data in the training set, and **15%** in the test set.
 
-### Evaluating the performance of the models
-For each model, we performed hyperparameter optimization through cross-validated grid-search. Model performance was then evaluated on 15% of the dataset using three metrics: ROC-AUC and F1 scores as in Muchlinski et al. [[5]](#5), and also the area under the precision-recall curve (PR-AUC). Although normally suited for binary classification, the receiver operating characteristic (ROC) curve (Sensitivity vs. 1 - Specificity) is less informative for imbalanced problems with a few positive examples [[6]](#6). Indeed, while recall is equivalent to sensitivity, specificity cannot capture data skew as well as precision.
-2 hyperparameters were tuned for each model:
-We tuned 2 hyperparameters for each model:
- * **Random Forests**:
-     * _max_features_: the number of features to consider to build the tree splits, namely either <img src="https://render.githubusercontent.com/render/math?math=\sqrt D"> or <img src="https://render.githubusercontent.com/render/math?math=\log(D)">, with <img src="https://render.githubusercontent.com/render/math?math=D"> the number of features.
-     * _max_samples_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
-  
- * **XGBoost**:
-     * _max_depth_: maximum depth of a tree, namely either 3, 6 (default) or 9
-     * _subsample_: the number of samples to draw from the feature matrix to build each tree, namely either two-thirds or the entirety of the _N_ samples
-  
- * **Multi-layer perceptron**:
-     * _alpha_: the amount of <img src="https://render.githubusercontent.com/render/math?math=L_2"> regularization
-     * _hidden_layer_sizes_: the number of hidden layers, namely either 4 or 8 (the width of the hidden layers was set to the number of features)
+Using the training set, we performed hyperparameter optimization through **grid search** combined with **10-fold cross-validation**. To face data imbalanced, **downsampling** was performed, where the sampling strategy was also optimized through grid search.
 
-As the data is heavily imbalanced (approximate positive-negative ratio = 1:100), downsampling of the majority class was performed. The sampling strategy was also optimized through grid search as different positive-negative ratios were explored (1:7, 1:3 and 1:1).
+Using the test set, we evaluated model performance using three metrics:
 
-### Result analysis 
+ * The area under the **ROC** curve (*sensitivity* vs. *1-specificity*)
+ * The **F1** score, the harmonic mean of *precision* and *recall* (or sensitivity)
+ * The area under the **Precision-recall** (PR) curve
 
-Looking at the ROC-AUC results, it seems that the implemented multi-layer perceptron (MLP) performed worse than tree-based methods, as both Random Forests and XGBoost achieved similar scores.
-That said, F1 and PR-AUC scores tell a different story with respect to Random Forests' predictive ability. Looking at these metrics, it seems XGBoost was far more robust at predicting civil events than Random Forest. The confusion matrices plotted above confirm this observation, as XGBoost was able to correctly classify 15 out of 20 civil war events, while Random Forests and MLP respectively predicted 9 and 5 civil war events.
-Concerning the tree-based methods, these observations are in accord with corrections of Muchlinski et al. [[5]](#5)'s findings by Wang [[7]](#7), who found a substantial difference in PR-AUC between Random Forests and gradient boosted trees (such as XGBoost) on a similar dataset.
-Overall, XGBoost was the best model for this task. In addition to its sheer rapidity, this algorithm has become increasingly popular for its performance in a variety of machine learning challenges [[8]](#8)[[9]](#9).
+Note that the two latter metrics are more suited for imbalanced problems, as _specificity_ cannot capture data skew as well as _precision_.
+
+## Results
+Looking at the ROC-AUC results, it seems that MLP performed the worst, while Random Forests and XGBoost achieved similar scores.
+
+That said, F1 and PR-AUC scores tell us a different story. Indeed, **XGBoost** (PR-AUC: 0.54, F1: 0.45) was far more robust at predicting civil war events than Random Forests (PR-AUC: 0.34, F1: 0.38). Once again, MLPs were at the bottom of the ladder.
+
+**Overall rankings: 1. XGBoost, 2. RF, 3. MLP**
+
+Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by extremely boosting the trees.
 
   <p align="center">
    <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
 
-***Figure 2.*** _Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
+_Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
 
-Feature importance was evaluated via **permutation importance**, which evaluates the mean decrease in a given metric (here, average precision) when permuting the feature values.
-In the figures above, we observe that the tree-based decision methods (Random Forests and XGBoost) have similar feature importances. In particular, primary commodity export features, exports of goods and services, fuel exports, the relative amount of trade and the relative amount of military manpower are the top-6 features in both models.
-Contrary to the mean decrease in Gini score, this method is robust to feature cardinality. Hence, it is not surprising to observe that some political indicators (e.g., the Polity index or a dummy variable describing whether the state is semi-federal) that were surprisingly absent in Muchlinski et al.'s model [5] are present in the most important features of Random Forests and XGBoost. In spite of this, both methods share a fair amount of important variables with those of Muchlinski et al.'s model [5] (e.g., primary commodity export features, trade, military power, infant mortality, illiteracy).
-On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
+## Opening the black box
+Classification results are one thing, but _how_ did our models classify civil war events?
+
+For that, we analyzed feature importance via **permutation importance**, which denotes the mean decrease in a given metric (here, PR-AUC) when randomly permuting the feature values. Contrary to the **mean decrease in Gini score**, this method is robust to feature cardinality.
+
+Here, we can see that the tree-based decision methods (Random Forests and XGBoost) had similar feature importances. In particular, primary commodity export features, exports of goods and services, fuel exports, trade-to-GDP ratio and the relative amount of military manpower are the top-6 features in both models.
+
+On the other hand, the MLP captured a lot more political indicators in its most important features, as the top-3 deals with political structure (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). Importantly, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP. 
 
   ![](images/compare.png)
-  ***Figure 3.** Permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
+  *Permutation importances of the three tested models (MLP, XGBoost and Random Forests)*
 
-## Effect of spatial data separation
-Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
-Thus, in this step, we explore whether spatial separation of civil war data (i.e., by continent or subregion) can help improve predictive accuracy of civil war events. To do so, we split the datasets according to the dummy variables, and fit a XGBoost classifier for each subset. Once again, cross-validated grid-search is used to optimize hyperparameters using the training set before evaluation on the test set.
+# Analysis 2: Predicting civil war in different geographical areas
+Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by different subregions and to see whether predictive accuracy differs when fitting the models separately on each group.
 
-One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset. With that in mind, we decided to discard this region from this part. On top of this machine learning-driven explanation, this decision is also motivated when looking at economic, social and political indicators. In particular, we selected the five most important features from XGBoost in the previous section, and compared bootstrapped 95% confidence intervals around the mean of these features for each geographical area. We can see that some of the variables are substantially different for Western Europe and US countries, especially primary commodity and fuel exports.
+In particular, the following geoscheme was used:
+* Western Europe and US
+* Eastern Europe and Central Asia (EECA)
+* Middle East and North Africa (MENA)
+* South and Eastern Asia and Oceania
+* Latin America
+* Subsaharan Africa
 
+One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset.
+
+With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
 <p align="center">
  <img src="images/features.png" data-zoom-image>
 </p>
 
 ***Figure 4.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
-
-After discarding Western Europe & US data, we fitted XGBoost on each of them using the same procedure as in the first section.
 
 <p align="center">
  <img src="images/geo_PIs.png" data-zoom-image>
@@ -107,33 +107,33 @@ After discarding Western Europe & US data, we fitted XGBoost on each of them usi
 </p>
 
 ***Figure 6.*** _PR-AUC, ROC-AUC and F1-scores for different subregions_
+ 
+As seen in the figure below, results for Sub-Saharan Africa, MENA and EECAare somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
+ 
+Sadly, the classifiers of civil war events in Latin America and South and East Asia and Oceania performed much worse. For the latter area, PR-AUC, ROC-AUC and F1 values resemble MLP performance in Step 1.
+ 
+Beyond that, an interesting result was that feature importance differed staggeringly over the different geographical areas:
+
+* In **EECA**, the importance of **"Years since last regime transition since 1949"** an **"Annual change in modified polity"** echo with the fact that many countries in this zone were either under the Soviet yoke (ex: **Romania**), and/or governed by long-lasting authoritarian regimes nowadays (ex: **Tajikistan**)
+
+* In **MENA**, the importance of trade-related features (**"Trade as % of GDP"** and **"% Annual change in GDP"**) are consistent with the importance of trade in this region compared to other regions. One can also notice the importance of **fuel and oil exports** (4th), which are vital to the economy of numerous countries in this area (Saudi Arabia, Iraq, and UAE are among the top-5 countries in terms of crude oil exports [11]).
+
+* In **South and East Asia and Oceania**, the three most important features were **"% adult population illiterate"**, **"Fuel and oil product exports as % of merchandise exports"** and **"neighbors' average ln(GDP per capita)"**. The fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [12], and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962).
+
+* In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [13]. 
 
 
-  * After data separation by geographical area, the results datasets are much smaller. As a consequence, the testing sets only contain a handful of positive examples (1 to 5). Thus, we decided to evaluate PR-AUC, ROC-AUC and F1 scores over 5 different train-test splits to minimize "lucky" or "unlucky" examples in the test sets.
- 
- * The results for Sub-Saharan Africa, Middle East and North Africa and Eastern Europe and Central Asia are somewhat similar to the performance of XGBoost in Step 1 on the whole dataset, especially when looking at ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5) than observed in Step 1 (0.54).
- 
- * The classifiers of civil war events in Latin America and South and East Asia and Oceania performed much worse. For the latter, PR-AUC, ROC-AUC and F1 values resemble the ones obtained when training the multi-layer perceptron in Step 1.
- 
- * Interestingly, the important predictors of civil war onset differed staggeringly over the different geographical areas:
-      * In **Eastern Europe and Central Asia**, the three most important features were "Exports of goods & servies as % of GDP", "Years since last regime transition since 1949" and "Annual change in modified polity". The last two variables echo with the fact many countries in these areas were either under the Soviet yoke (e.g., Romania, Afghanistan), and/or also governed by authoritarian regimes nowadays (e.g., Tajikistan, Kazakhstan)
-      * In **Middle East and North Africa (MENA)**, two trade-related features stood out: "Trade as % of GDP" and "% Annual change in GDP". This observation is consistent with the previous feature bar plots as MENA had the highest country-averaged trade-to-GDP ratio. One can also notice the importance of fuel and oil exports (4th), which are vital to the economy of numerous countries in this region (Saudi Arabia, Iraq, and UAE are among the top-5 countries in terms of crude oil exports [11]).
-      * In **South and East Asia and Oceania**, the three most important features were "% adult population illiterate", "Fuel and oil product exports as % of merchandise exports" and "neighbors' average ln(GDP per capita)". Although not visible in the bar plot, the fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [12], and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962). As a rapidly developing region during the second half of the century, it is possible that literacy rates and GDP per capita measurements somehow correlated with civil war onset as most of which occurred soon after the Second World War.
-      * In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. The first feature heavily contrasts with feature importances in the other regions. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [13]. 
-      * In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [3,14].
+* In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [3,14].
 
  
- * All the same, it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
-
- * While possibly contradicting with the results of Muchlinski et al. [5], who found that the US and Western Europe Dummy was an important feature of their Random Forests, this result seems coherent when looking at the mutual information between the different features and the response variable. Indeed, some geographical dummy variables (e.g., geo2 and geo57) are among the variables with the least mutual information with the response variable, meaning that they contain close to no information about civil war onset.
+**Conclusion:** it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
 
 ## Predicting civil war onset as time series forecasting
 In this section, we considered that each subregion is assigned to a time series of civil war/peace events. This part of the project aimed at seeing whether civil war events could be forecast given past data using simple time forecasting models (e.g., autogressors (AR) or ARIMA). 
 
 
-
 ## References
-<a id="1">[1]</a> Civil Wars and Foreign Powers: Outside Intervention in Intrastate Conflict. By Patrick M. Regan. Ann Arbor: University of Michigan Press, 2000.
+<a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613.
 
 <a id="2">[2]</a> Fearon, J. D., & Laitin, D. D. (2003). Ethnicity, insurgency, and civil war. _American political science review_, 75-90.
 
@@ -188,3 +188,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+"c"
