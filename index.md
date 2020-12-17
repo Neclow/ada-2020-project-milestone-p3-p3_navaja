@@ -31,9 +31,16 @@ Once the dataset cleaned, we started the analysis.
 In this section, we used the same features than Muchlinski _et al._ [[5]](#5) minus the features related to geographical area separation (e.g., "Western Europe and US Dummy"). Indeed, we investigated the effect of data aggregation by continent/subregion in a subsequent analysis. To ensure a meaningful comparison, the same training and testing sets were used to assess each tested algorithm.
 
 ### Defining the models
-Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). 
+Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Random Forests against two other machine learning algorithms: multi-layer perceptrons and gradient boosted trees (XGBoost). A detailed diagram of the three models can be found below.
 * **Multi-layer perceptrons** is a class of feedforward artificial neural network (ANN). The idea is to have layers of 'neurons' connected to each other with weights adjusted during the learning process. The output of each neuron layer, which is computed by some non-linear function of the sum of its inputs, is transmitted to the next layer. This model is occasionnally used to create mathematical models by regression analysis. Classification being a particular case of regression when the response variable is categorical, itvappears that multi-layer perceptrons make good classifier algorithms. As we explore civil war onset classification, evaluate the performance of this model thus seems promising.
+* **Random Forests** is a learning method used for classification. It grows a forest of decision trees to the data. Since it allows generating correct predictions of rare events even in extremely imbalanced data, it is relevant to test this method for predicting civil war onsets. 
 * **XGBoost** uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
+
+  <p align="center">
+   <img width="460" height="300" src="images/models.png" data-zoom-image>
+  </p>
+
+***Figure 1.*** _Illustration of Multi-layer perceptrons, Random Forests and Gradient Boosting algorithm (XGBoost)_
 
 ### Evaluating the performance of the models
 For each model, we performed hyperparameter optimization through cross-validated grid-search. Model performance was then evaluated on 15% of the dataset using three metrics: ROC-AUC and F1 scores as in Muchlinski et al. [[5]](#5), and also the area under the precision-recall curve (PR-AUC). Although normally suited for binary classification, the receiver operating characteristic (ROC) curve (Sensitivity vs. 1 - Specificity) is less informative for imbalanced problems with a few positive examples [[6]](#6). Indeed, while recall is equivalent to sensitivity, specificity cannot capture data skew as well as precision.
@@ -64,7 +71,7 @@ Overall, XGBoost was the best model for this task. In addition to its sheer rapi
    <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
 
-***Figure 1.*** _Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
+***Figure 2.*** _Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
 
 Feature importance was evaluated via **permutation importance**, which evaluates the mean decrease in a given metric (here, average precision) when permuting the feature values.
 In the figures above, we observe that the tree-based decision methods (Random Forests and XGBoost) have similar feature importances. In particular, primary commodity export features, exports of goods and services, fuel exports, the relative amount of trade and the relative amount of military manpower are the top-6 features in both models.
@@ -72,7 +79,7 @@ Contrary to the mean decrease in Gini score, this method is robust to feature ca
 On the other hand, the multi-layer perceptron captures a lot more political indicators in its most important features, the top-3 features concern the "political structure" of the country (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). That said, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP.
 
   ![](images/compare.png)
-  ***Figure 2.** Permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
+  ***Figure 3.** Permutation importances and the confusion matrices of the three tested models (MLPs, XGBoost and Ranfom Forests)*
 
 ## Effect of spatial data separation
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by subregions, and to see whether predictive accuracy differs when fitting the models separately on each group. We then analyzed feature importance to see whether different variables can explain better civil war events in different geographical areas.
@@ -85,7 +92,7 @@ One limit of this analysis is that only one civil war event was reported in West
  <img src="images/features.png" data-zoom-image>
 </p>
 
-***Figure 3.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
+***Figure 4.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
 
 After discarding Western Europe & US data, we fitted XGBoost on each of them using the same procedure as in the first section.
 
@@ -93,13 +100,13 @@ After discarding Western Europe & US data, we fitted XGBoost on each of them usi
  <img src="images/geo_PIs.png" data-zoom-image>
 </p>
 
-***Figure 4.*** _Permutation importances for different subregions_
+***Figure 5.*** _Permutation importances for different subregions_
 
 <p align="center">
  <img src="images/geo_scores.png" data-zoom-image>
 </p>
 
-***Figure 5.*** _PR-AUC, ROC-AUC and F1-scores for different subregions_
+***Figure 6.*** _PR-AUC, ROC-AUC and F1-scores for different subregions_
 
 
   * After data separation by geographical area, the results datasets are much smaller. As a consequence, the testing sets only contain a handful of positive examples (1 to 5). Thus, we decided to evaluate PR-AUC, ROC-AUC and F1 scores over 5 different train-test splits to minimize "lucky" or "unlucky" examples in the test sets.
