@@ -37,7 +37,7 @@ Here, we benchmarked the results obtained by Muchlinski et al. [[5]](#5) with Ra
 * **XGBoost** uses decision trees to produce a prediction model. It is a a machine learning technique for regression and classification problems. Such an algorithm is usually used to learn to rank. Thus, since this part of the project consists in ranking the parameters that best indicate the probability of a civil war onset in a given country, using XGBoost could prove to be interesting.
 
   <p align="center">
-   <img width="460" height="300" src="images/models.png" data-zoom-image>
+   <img src="images/models.png" data-zoom-image>
   </p>
 
 ***Figure 1.*** _Illustration of Multi-layer perceptrons, Random Forests and Gradient Boosting algorithm (XGBoost)_
