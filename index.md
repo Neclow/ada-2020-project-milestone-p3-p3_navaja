@@ -91,12 +91,6 @@ One limit of this analysis is that only one civil war event was reported in West
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
 <p align="center">
- <img src="images/features.png" data-zoom-image>
-</p>
-
-***Figure 4.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
-
-<p align="center">
  <img src="images/geo_PIs.png" data-zoom-image>
 </p>
 
