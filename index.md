@@ -76,7 +76,7 @@ On the other hand, the MLP captured a lot more political indicators in its most 
   <p align="center">
    <i><b> Figure 3. <b> Permutation importances of the three tested models (MLP, XGBoost and Random Forests) <i>
   </p>
-
+    
 # 2. Predicting civil war in different geographical areas
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by different subregions and to see whether predictive accuracy differs when fitting the models separately on each group.
 
