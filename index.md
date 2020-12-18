@@ -5,7 +5,7 @@ n°2
 {:toc}
 
 # What's at stake?
-In the wake of World War II, the world has seen a steady increase in **civil wars**, often with dire consequences for the affected states. Thereby, understanding the dynamics leading to such conflicts has become a burning topic for data scientists. Indeed, being able to predict civil war onset could be crucial in allow to anticipate or prevent these devastating events.
+In the wake of World War II, the world has seen a steady increase in **civil wars** [[1]](#1), often with dire consequences for the affected states. Thereby, understanding the underlying dynamics of such conflicts has become a burning topic for data scientists. Indeed, being able to predict civil war onset could be crucial in allow to anticipate or prevent these devastating events.
 
 # What has been done?
 Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5)) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. In this project, we extended the latter findings by investigating the following questions:
@@ -31,7 +31,7 @@ As mentioned previously, Muchlinski et al. [[5]](#5) achieved groundbreaking res
 
 * **Random Forests** (RFs) and **XGBoost** both use collections of _decision trees_ to perform predictions. They can be viewed as crowdsourcing  algorithms, as they combine the results of weak trees to make _oak-solid_ predictions.
 
-* On top of that, **XGBoost** relies on *gradient boosting*: here, the trees are trained <u>sequentially</u> instead of <u>independently</u> (like in RFs). In addition to its sheer rapidity, this algorithm has become increasingly popular for its performance in a variety of machine learning challenges [[8]](#8)[[9]](#9).
+* On top of that, **XGBoost** relies on *gradient boosting*: here, the trees are trained <u>sequentially</u> instead of <u>independently</u> (like in RFs). In addition to its sheer rapidity, this algorithm has become increasingly popular for its performance in a variety of machine learning challenges [[6]](#6)[[7]](#7).
 
   <p align="center">
    <img src="images/models.png" data-zoom-image>
@@ -92,7 +92,7 @@ In particular, the following geoscheme was used:
 * Latin America
 * Subsaharan Africa
 
-One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)) (among 1157 country-years). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset.
+One limit of this analysis is that only one civil war event was reported in Western Europe and US (The Troubles in Northern Ireland (1969)). This is especially problematic as only the train set or the test set could have a positive example. Thus, we decided to ignore this subset.
 
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
@@ -102,7 +102,7 @@ With that in mind, we re-used **XGBoost** for the remaining geographical areas a
 ![](images/geo_scores.png)
 <p align="center"><i><b>Figure 5.</b> PR-AUC, ROC-AUC and F1-scores for different subregions</i></p>
  
-As seen in the figure below, results for Sub-Saharan Africa, MENA and EECAare somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
+As seen in the figure below, results for Sub-Saharan Africa, MENA and EECA are somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
  
 Sadly, the classifiers of civil war events in Latin America and South and East Asia and Oceania performed much worse. For the latter area, PR-AUC, ROC-AUC and F1 values resemble MLP performance in Step 1.
  
@@ -110,14 +110,14 @@ Beyond that, an interesting result was that feature importance differed staggeri
 
 * In **EECA**, the importance of **"Years since last regime transition since 1949"** an **"Annual change in modified polity"** echo with the fact that many countries in this zone were either under the Soviet yoke (ex: **Romania**), and/or governed by long-lasting authoritarian regimes nowadays (ex: **Tajikistan**)
 
-* In **MENA**, the importance of trade-related features (**"Trade as % of GDP"** and **"% Annual change in GDP"**) are consistent with the importance of trade in this region compared to other regions. One can also notice the importance of **fuel and oil exports** (4th), which are vital to the economy of numerous countries in this area (Saudi Arabia, Iraq, and UAE are among the top-5 countries in terms of crude oil exports [11]).
+* In **MENA**, the importance of trade-related features (**"Trade as % of GDP"** and **"% Annual change in GDP"**) are consistent with the importance of trade in this region compared to other regions. One can also notice the importance of **fuel and oil exports** (4th), which are vital to the economy of numerous countries in this area (Saudi Arabia, Iraq, and UAE are among the top-5 countries in terms of crude oil exports [[8]](#8)).
 
-* In **South and East Asia and Oceania**, the three most important features were **"% adult population illiterate"**, **"Fuel and oil product exports as % of merchandise exports"** and **"neighbors' average ln(GDP per capita)"**. The fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [12], and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962).
+* In **South and East Asia and Oceania**, the three most important features were **"% adult population illiterate"**, **"Fuel and oil product exports as % of merchandise exports"** and **"neighbors' average ln(GDP per capita)"**. The fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [[9]](#9), and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962).
 
-* In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [13]. 
+* In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [[10]](#10). 
 
 
-* In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [3,14].
+* In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [[3]](#3).
 
  
 **Conclusion:** it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
@@ -130,22 +130,21 @@ Three common techniques are usually employed to study time series:
 * **Recurrent neural networks** (RNNs) have become incresingly popular with the deep learning revolution, and have shown tremendous performance in speech recognition or machine translation. Nonetheless, such neural networks generally require a lot of data to be able to avoid overfitting and output robust predictions.
 * **Autoregression** and **Hidden Markov Models** (HMMs) are also popular for analyzing time series data. To our best knowledge, they are however not well suited to forecast rare events such as civil war onset.
 
-With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country $c$, we aim at classifying events at year $t$ $y_{t,c}$ given features from previous years $X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}$. We splitted the dataset for each country, and created sequences of $N$ years for countries with more than $2N$ years of existence. In this project, we assumed that $N = 5$ years should be the maximal delay to explain civil war onset at a given year.
+With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country <img src="https://render.githubusercontent.com/render/math?math= c"> at year <img src="https://render.githubusercontent.com/render/math?math= t">, we aim at classifying events at year <img src="https://render.githubusercontent.com/render/math?math=y_{t,c}"> given features from previous years <img src="https://render.githubusercontent.com/render/math?math= X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}">. 
 
 ## Preparing the dataset
-For this task, we splitted the dataset for each country, and created sequences of $N$ years for countries with more than $2N$ years of existence. In this project, we assumed that a delay of $N = 5$ years should be the maximal delay to explain civil war onset at a given year.
+For this task, we splitted the dataset for each country, and created sequences of <img src="https://render.githubusercontent.com/render/math?math= N"> years for countries with more than <img src="https://render.githubusercontent.com/render/math?math= 2N"> years of existence. In this project, we assumed that <img src="https://render.githubusercontent.com/render/math?math= N_{max} = 5"> years should be the maximal delay to explain civil war onset at a given year.
 
 ## Results
 
-When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with $N = 1$, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
-
+When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with <img src="https://render.githubusercontent.com/render/math?math= N = 1">, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
 
   <p align="center">
    <img src="images/time_delayed_barplot.png" data-zoom-image>
   </p>
   <p align="center"><i><b>Figure 6.</b> PR-AUC, ROC-AUC and F1-scores with time-delayed features</i></p>
 
-Overall, these results remain arguably worse than during the two previous steps. In fairness, this problem is also conceptually harder. Indeed, many civil war events are not continuous processes, but rather tend to spark spontaneously. For instance, the Arab Spring suddenly triggered several uprisings in Syria, Libya and Egypt in 2011 [10].
+Overall, these results remain arguably worse than during the two previous steps. In fairness, this problem is also conceptually harder. Indeed, many civil war events are not continuous processes, but rather tend to spark spontaneously. For instance, the Arab Spring suddenly triggered several uprisings in Syria, Libya and Egypt in 2011 [[11]](#11).
 
 **Conclusion:** Time-series forecasting of civil war onset with this data was unsuccessful. Further research for this task could be performed with larger datasets to be able to harness the power of RNNs.
 
@@ -161,12 +160,14 @@ Overall, these results remain arguably worse than during the two previous steps.
 
 <a id="5">[5]</a> Muchlinski, D., Siroky, D., He, J., & Kocher, M. (2016). Comparing random forest with logistic regression for predicting class-imbalanced civil war onset data. _Political Analysis_, 87-103.
 
-<a id="6">[6]</a>  Davis, J., & Goadrich, M. (2006). The relationship between Precision-Recall and ROC curves. In Proceedings of the 23rd international conference on Machine learning (pp. 233-240).
+<a id="6">[6]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In NIPS 2014 workshop on high-energy physics and machine learning (pp. 69-80).
 
-<a id="7">[7]</a> Wang, Y. (2019). Comparing random forest with logistic regression for predicting class-imbalanced civil war onset data: A comment. Political Analysis, 27(1), 107-110.
+<a id="7">[7]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
 
-<a id="8">[8]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In NIPS 2014 workshop on high-energy physics and machine learning (pp. 69-80).
+<a id="8">[8]</a> Central Intelligence Agency. (2018). The World Factbook - country comparison:: crude oil - exports. https://www.cia.gov/library/publications/the-world-factbook/rankorder/2242rank.html
 
-<a id="9">[9]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
+<a id="9">[9]</a> U.S. Energy Information Administration (EIA). (2018). Total energy production from coal 2018. https://www.eia.gov/international/rankings/country/CHN?pid=4411&aid=1&f=A&y=01%2F01%2F2018&u=0&v=none&pa=286
 
+<a id="10">[10]</a> Encyclopædia Britannica. (2019). History of Latin America - Latin America since the mid-20th century. https://www.britannica.com/place/Latin-America/Latin-America-since-the-mid-20th-century
 
+<a id="11">[11]</a> Henry, C., & Jang, J. H. (2013). The Arab Spring: Will it Lead to Democratic Transitions? Springer.
