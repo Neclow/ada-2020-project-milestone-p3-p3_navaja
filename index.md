@@ -35,7 +35,7 @@ As mentioned previously, Muchlinski et al. [[5]](#5) achieved groundbreaking res
 
   <p align="center">
    <img src="images/models.png" data-zoom-image>
-   <i><b>Figure 1.</b> Illustration of the models</i>
+   <i><b>Figure 1.</b>Diagram of mutli-layer perceptrons (MLPs), Random Forests (RFs) and XGBoost</i>
   </p>
 
 
@@ -65,7 +65,7 @@ Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by e
    <img src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
   <p align="center"> 
-  <i><b> Figure 2. </b> Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) </i> </p>
+  <i><b> Figure 2. </b>PR-AUC, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) </i> </p>
 
 ## Opening the black box
 Classification results are one thing, but _how_ did our models classify civil war events?
@@ -78,7 +78,7 @@ On the other hand, the MLP captured a lot more political indicators in its most 
 
   ![](images/compare.png)
   <p align="center">
-   <i><b> Figure 3. </b> Permutation importances of the three tested models (MLP, XGBoost and Random Forests) </i>
+   <i><b> Figure 3. </b> Top-20 features in terms of permutation importance for MLP, XGBoost and Random Forests</i>
   </p>
     
 # Analysis 2: Predicting civil war in different geographical areas
@@ -97,10 +97,10 @@ One limit of this analysis is that only one civil war event was reported in West
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
 ![](images/geo_PIs.png)
-<p align="center"><i><b>Figure 4.</b> Permutation importances for different subregions</i></p>
+<p align="center"><i><b>Figure 4.</b> Top-10 features in terms of permutation importance for XGBoost, trained on different geographical areas</i></p>
 
 ![](images/geo_scores.png)
-<p align="center"><i><b>Figure 5.</b> PR-AUC, ROC-AUC and F1-scores for different subregions</i></p>
+<p align="center"><i><b>Figure 5.</b> PR-AUC, ROC-AUC and F1-scores for XGBoost, trained on different geographical areas</i></p>
  
 As seen in the figure below, results for Sub-Saharan Africa, MENA and EECA are somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
  
@@ -140,7 +140,7 @@ When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model 
   <p align="center">
    <img src="images/time_delayed_barplot.png" data-zoom-image>
   </p>
-  <p align="center"><i><b>Figure 6.</b> PR-AUC, ROC-AUC and F1-scores with time-delayed features</i></p>
+  <p align="center"><i><b>Figure 6.</b> PR-AUC, ROC-AUC and F1-scores for XGBoost, trained with time-delayed features</i></p>
 
 Overall, these results remain arguably worse than during the two previous steps. In fairness, this problem is also conceptually harder. Indeed, many civil war events are not continuous processes, but rather tend to spark spontaneously. For instance, the Arab Spring suddenly triggered several uprisings in Syria, Libya and Egypt in 2011 [[11]](#11).
 
