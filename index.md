@@ -1,7 +1,7 @@
 In this project, we analyzed different methods to classify and predict civil war onset. First, we compared different machine learning algorithms to state-of-the-art results. Then, we explored whether these events could be better predicted with a specific model for given geographical areas and if they could forecast from past data (instead of a "simple" binary classification problem).
 
 * TOC {:toc}
-n°2
+1.
 {:toc}
 
 # What's at stake?
@@ -35,7 +35,7 @@ As mentioned previously, Muchlinski et al. [[5]](#5) achieved groundbreaking res
 
   <p align="center">
    <img src="images/models.png" data-zoom-image>
-   <i><b>Figure 1.</b>Diagram of mutli-layer perceptrons (MLPs), Random Forests (RFs) and XGBoost</i>
+   <i><b>Figure 1.</b> Diagram of mutli-layer perceptrons (MLPs), Random Forests (RFs) and XGBoost</i>
   </p>
 
 
@@ -65,7 +65,7 @@ Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by e
    <img src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
   <p align="center"> 
-  <i><b> Figure 2. </b>PR-AUC, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) </i> </p>
+  <i><b> Figure 2.</b> PR-AUC, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) </i> </p>
 
 ## Opening the black box
 Classification results are one thing, but _how_ did our models classify civil war events?
@@ -78,7 +78,7 @@ On the other hand, the MLP captured a lot more political indicators in its most 
 
   ![](images/compare.png)
   <p align="center">
-   <i><b> Figure 3. </b> Top-20 features in terms of permutation importance for MLP, XGBoost and Random Forests</i>
+   <i><b> Figure 3.</b> Top-20 features in terms of permutation importance for MLP, XGBoost and Random Forests</i>
   </p>
     
 # Analysis 2: Predicting civil war in different geographical areas
