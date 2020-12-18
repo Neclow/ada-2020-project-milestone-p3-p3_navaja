@@ -21,7 +21,7 @@ The Civil War Data comprises annual measurements for each recognized country fro
  * **Economy**: GDP growth and per capita, 
  * **Socio-cultural development**: literacy rate, life expectancy, religious diversity indices... 
  * **Geography**: in which region the country is located, how rough is its terrain
-In total, our dataset has **7140** "country-years",  **88** features and **1** response variable, which consists in a binary indicator of civil war onset (1 = civil war, 0 otherwise). Importantly, the data is <span style="color: red;">heavily</span> imbalanced, as civil war onset approximately occurred **1%** of the time! 
+In total, our dataset has **7140** "country-years",  **88** features and **1** response variable, which consists in a binary indicator of civil war onset (1 = civil war, 0 otherwise). Importantly, the data is heavily imbalanced, as civil war onset approximately occurred **1%** of the time! 
  
 # Analysis 1: Comparing machine learning algorithms for civil war onset classification
 As mentioned previously, Muchlinski et al. [[5]](#5) achieved groundbreaking results with this dataset using **Random Forests**. In this section, we benchmarked these results against two widely used ML algorithms: **multi-layer perceptrons** (MLPs) and **XGBoost**, an _extreme_ gradient boosted tree-based model. As we intended to study geographical separation later, we worked here without the 6 location-related variables.
@@ -57,7 +57,10 @@ Looking at the ROC-AUC results, MLP performed the worst, while Random Forests an
 
 That said, F1 and PR-AUC scores tell us a different story. Indeed, **XGBoost** (PR-AUC: 0.54, F1: 0.45) was far more robust at predicting civil war events than Random Forests (PR-AUC: 0.34, F1: 0.38). Once again, MLPs were at the bottom of the ladder.
 
-**Overall rankings: 1. XGBoost, 2. RF, 3. MLP**
+**Overall rankings:** 
+ * **1. XGBoost**
+ * **2. RF**
+ * **3. MLP**
 
 Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by _extremely boosting_ the decision trees.
 
@@ -146,6 +149,8 @@ Overall, these results remain arguably worse than during the two previous steps.
 
 **Conclusion:** Time-series forecasting of civil war onset with this data was unsuccessful. Further research for this task could be performed with larger datasets to be able to harness the power of RNNs.
 
+# Conclusion
+All in all, we have seen that XGBoost outperformed Random Forests and MLPs in the binary classification of civil war onset. While geographically separated modelling did not improve predictive ability, it remained interesting to see that feature important somewhat coincided with the historical specificities of each geographical region. At last, more work has to be done to improve time-series forecasting of rare events such as civil war onset.
 
 # References
 <a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613. <a href="https://journals.sagepub.com/doi/pdf/10.1177/0022343320934986">link</a>
