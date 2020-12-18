@@ -133,7 +133,7 @@ Three common techniques are usually employed to study time series:
 With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country <img src="https://render.githubusercontent.com/render/math?math=c"> at year <img src="https://render.githubusercontent.com/render/math?math=t">, we aim at classifying events at year <img src="https://render.githubusercontent.com/render/math?math=y_{t,c}"> given features from previous years <img src="https://render.githubusercontent.com/render/math?math=X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}">. 
 
 ## Preparing the dataset
-For this task, we splitted the dataset for each country, and created sequences of <img src="https://render.githubusercontent.com/render/math?math= N"> years for countries with more than <img src="https://render.githubusercontent.com/render/math?math= 2N"> years of existence. In this project, we assumed that <img src="https://render.githubusercontent.com/render/math?math=N_{max} = 5"> years should be the maximal delay to explain civil war onset at a given year.
+For this task, we splitted the dataset for each country, and created sequences of <img src="https://render.githubusercontent.com/render/math?math=N"> years for countries with more than <img src="https://render.githubusercontent.com/render/math?math=2N"> years of existence. In this project, we assumed that <img src="https://render.githubusercontent.com/render/math?math=N_{max} = 5"> years should be the maximal delay to explain civil war onset at a given year.
 
 ## Results
 
