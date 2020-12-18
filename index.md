@@ -59,8 +59,9 @@ Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by e
 
   <p align="center">
    <img src="images/ML_algos_barplot.png" data-zoom-image>
-    <i><b> Figure 2. <b> Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) <i>
   </p>
+  <p align="center"> 
+  <i><b> Figure 2. <b> Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) <i> </p>
 
 ## Opening the black box
 Classification results are one thing, but _how_ did our models classify civil war events?
@@ -92,19 +93,14 @@ One limit of this analysis is that only one civil war event was reported in West
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
 ![](images/features.png)
-<p align="center">
- <i><b> Figure 4. <b> Comparison of the parameters that best explained the probability for a civil war onset for different world subregions <i>
-</p>
+<p align="center"><i><b>Figure 4.<b> Comparison of the parameters that best explained the probability for a civil war onset for different world subregions<i></p>
+
 
 ![](images/geo_PIs.png)
-<p align="center">
- <i><b> Figure 5. <b> Permutation importances for different subregions <i>
-</p>
+<p align="center"><i><b>Figure 5.<b> Permutation importances for different subregions<i></p>
 
 ![](images/geo_scores.png)
-<p align="center">
- <i><b> Figure 6. <b> PR-AUC, ROC-AUC and F1-scores for different subregions <i>
-</p>
+<p align="center"><i><b>Figure 6.<b> PR-AUC, ROC-AUC and F1-scores for different subregions<i></p>
  
 As seen in the figure below, results for Sub-Saharan Africa, MENA and EECAare somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
  
