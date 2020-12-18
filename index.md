@@ -59,9 +59,8 @@ Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by e
 
   <p align="center">
    <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
+    <i><b> Figure 2. <b> Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) <i>
   </p>
-
-_Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests)_
 
 ## Opening the black box
 Classification results are one thing, but _how_ did our models classify civil war events?
@@ -73,7 +72,9 @@ Here, we can see that the tree-based decision methods (Random Forests and XGBoos
 On the other hand, the MLP captured a lot more political indicators in its most important features, as the top-3 deals with political structure (1. Whether it is a new state or not, 2. whether it is a federal state or not, 3. Polity annual change). Importantly, the trade-related features that were critical in the tree-based models are also present in top 10-20 features of the MLP. 
 
   ![](images/compare.png)
-  *Permutation importances of the three tested models (MLP, XGBoost and Random Forests)*
+  <p align="center">
+   <i><b> Figure 3. <b> Permutation importances of the three tested models (MLP, XGBoost and Random Forests) <i>
+  </p>
 
 # 2. Predicting civil war in different geographical areas
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by different subregions and to see whether predictive accuracy differs when fitting the models separately on each group.
@@ -92,21 +93,18 @@ With that in mind, we re-used **XGBoost** for the remaining geographical areas a
 
 <p align="center">
  <img src="images/features.png" data-zoom-image>
+ <i><b> Figure 4. <b> Comparison of the parameters that best explained the probability for a civil war onset for different world subregions <i>
 </p>
-
-***Figure 4.*** _Comparison of the parameters that best explained the probability for a civil war onset for different world subregions_
 
 <p align="center">
  <img src="images/geo_PIs.png" data-zoom-image>
+ <i><b> Figure 5. <b> Permutation importances for different subregions <i>
 </p>
-
-***Figure 5.*** _Permutation importances for different subregions_
 
 <p align="center">
  <img src="images/geo_scores.png" data-zoom-image>
+ <i><b> Figure 6. <b> PR-AUC, ROC-AUC and F1-scores for different subregions <i>
 </p>
-
-***Figure 6.*** _PR-AUC, ROC-AUC and F1-scores for different subregions_
  
 As seen in the figure below, results for Sub-Saharan Africa, MENA and EECAare somewhat similar to the performance of XGBoost in the first problem, especially regarding ROC-AUC and F1 scores. On the other hand, the PR-AUC scores are slightly lower (0.45-0.5 vs. 0.54 previously).
  
