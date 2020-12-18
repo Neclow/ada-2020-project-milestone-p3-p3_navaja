@@ -81,7 +81,7 @@ On the other hand, the MLP captured a lot more political indicators in its most 
    <i><b> Figure 3. </b> Permutation importances of the three tested models (MLP, XGBoost and Random Forests) </i>
   </p>
     
-# 2. Predicting civil war in different geographical areas
+# Analysis 2: Predicting civil war in different geographical areas
 Following the importance of the "Western Europe and US Dummy" variable in Muchlinski _et al._ [[5]](#5), we decided to aggregate the data by different subregions and to see whether predictive accuracy differs when fitting the models separately on each group.
 
 In particular, the following geoscheme was used:
@@ -116,13 +116,11 @@ Beyond that, an interesting result was that feature importance differed staggeri
 
 * In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [[10]](#10). 
 
-
 * In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [[3]](#3).
-
  
 **Conclusion:** it seems that geographical area separation did not help better classify civil war events. A possible reason for such results would be that the classifiers were trained with less data, and had thus less generalizing abilities. 
 
-# 3. Can civil war onset be forecast?
+# Analysis 3: Can civil war onset be forecast?
 In this section, we will consider that each country is assigned to a time series of civil war/peace events, and see whether civil war events could be forecast given past data using simple time forecasting models.
 
 Three common techniques are usually employed to study time series:
@@ -149,7 +147,7 @@ Overall, these results remain arguably worse than during the two previous steps.
 **Conclusion:** Time-series forecasting of civil war onset with this data was unsuccessful. Further research for this task could be performed with larger datasets to be able to harness the power of RNNs.
 
 
-## References
+# References
 <a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613. <a href="https://journals.sagepub.com/doi/pdf/10.1177/0022343320934986">link</a>
 
 <a id="2">[2]</a> Fearon, J. D., & Laitin, D. D. (2003). Ethnicity, insurgency, and civil war. _American political science review_, 75-90. <a href="https://www.jstor.org/stable/pdf/3118222.pdf?casa_token=isFvLon_eKsAAAAA:8HeoXU8qmr5H9Jyos3suWc13q4e5dK0x3rPvQK4bsftKOP8BNNSi7JQ1DxKrPHWSvFuFUxK4mzn8Lx5HJ764eR8NHd7r1JZM4uYis5H19syajxOakOol">link</a>
