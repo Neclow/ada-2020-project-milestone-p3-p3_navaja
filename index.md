@@ -164,10 +164,10 @@ Overall, these results remain arguably worse than during the two previous steps.
 
 <a id="7">[7]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
 
-<a id="8">[8]</a> Central Intelligence Agency. (2018). The World Factbook - country comparison:: crude oil - exports. https://www.cia.gov/library/publications/the-world-factbook/rankorder/2242rank.html
+<a id="8">[8]</a> Central Intelligence Agency. (2018). The World Factbook - country comparison:: crude oil - exports. <a href="https://www.cia.gov/library/publications/the-world-factbook/rankorder/2242rank.html">link</a>
 
-<a id="9">[9]</a> U.S. Energy Information Administration (EIA). (2018). Total energy production from coal 2018. https://www.eia.gov/international/rankings/country/CHN?pid=4411&aid=1&f=A&y=01%2F01%2F2018&u=0&v=none&pa=286
+<a id="9">[9]</a> U.S. Energy Information Administration (EIA). (2018). Total energy production from coal 2018. <a href="https://www.eia.gov/international/rankings/country/CHN?pid=4411&aid=1&f=A&y=01%2F01%2F2018&u=0&v=none&pa=286">link</a> 
 
-<a id="10">[10]</a> Encyclopædia Britannica. (2019). History of Latin America - Latin America since the mid-20th century. https://www.britannica.com/place/Latin-America/Latin-America-since-the-mid-20th-century
+<a id="10">[10]</a> Encyclopædia Britannica. (2019). History of Latin America - Latin America since the mid-20th century. <a href="https://www.britannica.com/place/Latin-America/Latin-America-since-the-mid-20th-century">link</a> 
 
-<a id="11">[11]</a> Henry, C., & Jang, J. H. (2013). The Arab Spring: Will it Lead to Democratic Transitions? Springer.
+<a id="11">[11]</a> Henry, C., & Jang, J. H. (2013). _The Arab Spring: Will it Lead to Democratic Transitions?_ Springer.
