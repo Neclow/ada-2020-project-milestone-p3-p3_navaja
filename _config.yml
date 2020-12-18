@@ -1,4 +1,11 @@
 theme: jekyll-theme-cayman
 title: [Benchmarking predictive frameworks of civil war onset]
 description: [Julie Kloeckner, Neil Scheidwasser, Victor Stimpfling]
+authors:
+  juklo:
+    name: Julie Kloeckner
+  neclow:
+    name: Neil Scheidwasser
+  stimpfli:
+    name: Victor Stimpfling
 markdown: kramdown
