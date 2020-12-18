@@ -130,14 +130,14 @@ Three common techniques are usually employed to study time series:
 * **Recurrent neural networks** (RNNs) have become incresingly popular with the deep learning revolution, and have shown tremendous performance in speech recognition or machine translation. Nonetheless, such neural networks generally require a lot of data to be able to avoid overfitting and output robust predictions.
 * **Autoregression** and **Hidden Markov Models** (HMMs) are also popular for analyzing time series data. To our best knowledge, they are however not well suited to forecast rare events such as civil war onset.
 
-With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country <img src="https://render.githubusercontent.com/render/math?math= c"> at year <img src="https://render.githubusercontent.com/render/math?math= t">, we aim at classifying events at year <img src="https://render.githubusercontent.com/render/math?math=y_{t,c}"> given features from previous years <img src="https://render.githubusercontent.com/render/math?math= X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}">. 
+With that in mind, we decided to (once again) predict civil war onset with **XGBoost**, this time with _time-delayed features_. For each country <img src="https://render.githubusercontent.com/render/math?math=c"> at year <img src="https://render.githubusercontent.com/render/math?math=t">, we aim at classifying events at year <img src="https://render.githubusercontent.com/render/math?math=y_{t,c}"> given features from previous years <img src="https://render.githubusercontent.com/render/math?math=X_{t-1, c}, X_{t-2, c}, ..., X_{t-N, c}">. 
 
 ## Preparing the dataset
-For this task, we splitted the dataset for each country, and created sequences of <img src="https://render.githubusercontent.com/render/math?math= N"> years for countries with more than <img src="https://render.githubusercontent.com/render/math?math= 2N"> years of existence. In this project, we assumed that <img src="https://render.githubusercontent.com/render/math?math= N_{max} = 5"> years should be the maximal delay to explain civil war onset at a given year.
+For this task, we splitted the dataset for each country, and created sequences of <img src="https://render.githubusercontent.com/render/math?math= N"> years for countries with more than <img src="https://render.githubusercontent.com/render/math?math= 2N"> years of existence. In this project, we assumed that <img src="https://render.githubusercontent.com/render/math?math=N_{max} = 5"> years should be the maximal delay to explain civil war onset at a given year.
 
 ## Results
 
-When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with <img src="https://render.githubusercontent.com/render/math?math= N = 1">, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
+When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with <img src="https://render.githubusercontent.com/render/math?math=N = 1">, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
 
   <p align="center">
    <img src="images/time_delayed_barplot.png" data-zoom-image>
