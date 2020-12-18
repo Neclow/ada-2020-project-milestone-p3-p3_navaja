@@ -168,4 +168,3 @@ Overall, these results remain arguably worse than during the two previous steps.
 <a id="9">[9]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
 
 
- <img src="images/geo_scores.png" data-zoom-image>
