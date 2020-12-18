@@ -1,3 +1,5 @@
+In this project, we analyzed different methods to classify and predict civil war onset. First, we compared different machine learning algorithms to state-of-the-art results. Then, we explored whether these events could be better predicted with a specific model for given geographical areas and if they could forecast from past data (instead of a "simple" binary classification problem).
+
 * TOC {:toc}
 n°2
 {:toc}
