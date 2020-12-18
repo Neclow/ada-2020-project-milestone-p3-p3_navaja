@@ -139,7 +139,8 @@ For this task, we splitted the dataset for each country, and created sequences o
 
 When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with $N = 1$, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
 
-<span style="color: red;">insert image here</span>
+![](images/time_delayed_barplot.png)
+<p align="center"><i><b>Figure 7.</b> PR-AUC, ROC-AUC and F1-scores with time-delayed features</i></p>
 
 Overall, these results remain arguably worse than during the two previous steps. In fairness, this problem is also conceptually harder. Indeed, many civil war events are not continuous processes, but rather tend to spark spontaneously. For instance, the Arab Spring suddenly triggered several uprisings in Syria, Libya and Egypt in 2011 [10].
 
