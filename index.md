@@ -58,7 +58,7 @@ That said, F1 and PR-AUC scores tell us a different story. Indeed, **XGBoost** (
 Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by extremely boosting the trees.
 
   <p align="center">
-   <img width="460" height="300" src="images/ML_algos_barplot.png" data-zoom-image>
+   <img src="images/ML_algos_barplot.png" data-zoom-image>
     <i><b> Figure 2. <b> Comparison between PR, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) <i>
   </p>
 
