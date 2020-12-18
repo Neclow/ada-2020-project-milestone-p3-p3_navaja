@@ -138,7 +138,7 @@ For this task, we splitted the dataset for each country, and created sequences o
 When looking at imbalance-robust metrics (PR-AUC and F1 scores), the best model seems to be obtained with $N = 1$, i.e. when only considering data from the previous year. A possible explanation for such a result is that most variables will tend to remain similar over a year, while greater change can be expected when considering older data.
 
 <p align="center">
-  <img src="images/time_delayed_barplot.png">
+ <img src="images/time_delayed_barplot.png">
  <i><b>Figure 6.</b> PR-AUC, ROC-AUC and F1-scores with time-delayed features</i>
  </p>
 
