@@ -91,18 +91,18 @@ One limit of this analysis is that only one civil war event was reported in West
 
 With that in mind, we re-used **XGBoost** for the remaining geographical areas and followed the same procedure as in the first analysis, _but with a twist_. As the testing sets only contain a handful of positive examples (typically 1 to 5), we decided to evaluate model performance over <u>10</u> different train-test splits to minimize "lucky" or "unlucky" training-test splits.
 
+![](images/features.png)
 <p align="center">
- <img src="images/features.png" data-zoom-image>
  <i><b> Figure 4. <b> Comparison of the parameters that best explained the probability for a civil war onset for different world subregions <i>
 </p>
 
+![](images/geo_PIs.png)
 <p align="center">
- <img src="images/geo_PIs.png" data-zoom-image>
  <i><b> Figure 5. <b> Permutation importances for different subregions <i>
 </p>
 
+![](images/geo_scores.png)
 <p align="center">
- <img src="images/geo_scores.png" data-zoom-image>
  <i><b> Figure 6. <b> PR-AUC, ROC-AUC and F1-scores for different subregions <i>
 </p>
  
@@ -168,3 +168,6 @@ Overall, these results remain arguably worse than during the two previous steps.
 <a id="8">[8]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In NIPS 2014 workshop on high-energy physics and machine learning (pp. 69-80).
 
 <a id="9">[9]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
+
+
+ <img src="images/geo_scores.png" data-zoom-image>
