@@ -150,19 +150,19 @@ Overall, these results remain arguably worse than during the two previous steps.
 
 
 ## References
-<a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613.
+<a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613. <a href="https://journals.sagepub.com/doi/pdf/10.1177/0022343320934986">link</a>
 
-<a id="2">[2]</a> Fearon, J. D., & Laitin, D. D. (2003). Ethnicity, insurgency, and civil war. _American political science review_, 75-90.
+<a id="2">[2]</a> Fearon, J. D., & Laitin, D. D. (2003). Ethnicity, insurgency, and civil war. _American political science review_, 75-90. <a href="https://www.jstor.org/stable/pdf/3118222.pdf?casa_token=isFvLon_eKsAAAAA:8HeoXU8qmr5H9Jyos3suWc13q4e5dK0x3rPvQK4bsftKOP8BNNSi7JQ1DxKrPHWSvFuFUxK4mzn8Lx5HJ764eR8NHd7r1JZM4uYis5H19syajxOakOol">link</a>
 
-<a id="3">[3]</a> Collier, P., & Hoeffler, A. (2004). Greed and grievance in civil war. _Oxford economic papers_, 56(4), 563-595.
+<a id="3">[3]</a> Collier, P., & Hoeffler, A. (2004). Greed and grievance in civil war. _Oxford economic papers_, 56(4), 563-595. <a href="https://academic.oup.com/oep/article/56/4/563/2361902?casa_token=6Zt6w3v9HFsAAAAA:vM_vHN1WF0J1uphvdV3bJOLv-Q0JaMjXJyxAsFtJrxpHhhnvWT1cydX6HZ9qD8OSo9Bd7qJAz0mpig">link</a>
 
-<a id="4">[4]</a> Hegre, H., & Sambanis, N. (2006). Sensitivity analysis of empirical results on civil war onset. _Journal of conflict resolution_, 50(4), 508-535.
+<a id="4">[4]</a> Hegre, H., & Sambanis, N. (2006). Sensitivity analysis of empirical results on civil war onset. _Journal of conflict resolution_, 50(4), 508-535. <a href="https://www.jstor.org/stable/pdf/27638504.pdf?casa_token=LScMjel1D9IAAAAA:TCzVGzpfc97TH08QnCoJcCOTxMiqN5CCdDvhZPIWOyqh5tnvXlUt2KC6Cc4h5sQxDeTyCj4BOP6dofhqu8XIjmlb_MAzohEYicQx-rsjjyEokrPkH7g-">link</a>
 
-<a id="5">[5]</a> Muchlinski, D., Siroky, D., He, J., & Kocher, M. (2016). Comparing random forest with logistic regression for predicting class-imbalanced civil war onset data. _Political Analysis_, 87-103.
+<a id="5">[5]</a> Muchlinski, D., Siroky, D., He, J., & Kocher, M. (2016). Comparing random forest with logistic regression for predicting class-imbalanced civil war onset data. _Political Analysis_, 87-103. <a href="http://davidsiroky.faculty.asu.edu/predictcivilwar.pdf">link</a>
 
-<a id="6">[6]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In NIPS 2014 workshop on high-energy physics and machine learning (pp. 69-80).
+<a id="6">[6]</a> Chen, T., & He, T. (2015). Higgs boson discovery with boosted trees. In _NIPS 2014 workshop on high-energy physics and machine learning_ (pp. 69-80). <a href="http://proceedings.mlr.press/v42/chen14.pdf">link</a>
 
-<a id="7">[7]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In IberLEF@ SEPLN (pp. 160-164).
+<a id="7">[7]</a> Ismailov, A. (2019). Humor Analysis Based on Human Annotation Challenge at IberLEF 2019: First-place Solution. In _IberLEF@ SEPLN_ (pp. 160-164). <a href="http://ceur-ws.org/Vol-2421/HAHA_paper_3.pdf">link</a>
 
 <a id="8">[8]</a> Central Intelligence Agency. (2018). The World Factbook - country comparison:: crude oil - exports. <a href="https://www.cia.gov/library/publications/the-world-factbook/rankorder/2242rank.html">link</a>
 
