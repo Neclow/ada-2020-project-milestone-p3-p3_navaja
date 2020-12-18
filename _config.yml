@@ -9,3 +9,5 @@ authors:
   stimpfli:
     name: Victor Stimpfling
 markdown: kramdown
+github:
+  repository_url: https://github.com/epfl-ada/ada-2020-project-milestone-p3-p3_navaja
