@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
 title: [Benchmarking predictive frameworks of civil war onset]
-description: [Here we make a data analysis to examine whether predictions differ when training separate models for each continent or subregion and explore whether civil war events can be forecast as time series instead of simple regression points, e.g., using autoregressive models]
+description: [Here we make a data analysis to examine whether predictions differ when training separate models for each continent or subregion and explore whether civil war events can be forecast as time series instead of simple regression points for e.g. using autoregressive models]
 markdown: kramdown
