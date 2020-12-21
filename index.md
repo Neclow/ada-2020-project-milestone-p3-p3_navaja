@@ -68,7 +68,7 @@ Thus, it seems that Muchlinski et al.'s [[5]](#5) results could be improved by _
    <img src="images/ML_algos_barplot.png" data-zoom-image>
   </p>
   <p align="center"> 
-  <i><b> Figure 2.</b> PR-AUC, ROC and F1-scores of the three tested models (MLPs, XGBoost and Ranfom Forests) </i> </p>
+  <i><b> Figure 2.</b> PR-AUC, ROC and F1-scores of the three tested models (MLPs, XGBoost and Random Forests) </i> </p>
 
 ## Opening the black box
 Classification results are one thing, but _how_ did our models classify civil war events?
