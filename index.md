@@ -8,7 +8,7 @@ In this project, we analyzed different methods to classify and predict civil war
 In the wake of World War II, the world has seen a steady increase in **civil wars** [[1]](#1), often with dire consequences for the affected states. Thereby, understanding the underlying dynamics of such conflicts has become a burning topic for data scientists. Indeed, being able to predict civil war onset could be crucial in allow to anticipate or prevent these devastating events.
 
 # What has been done?
-Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5)) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. In this project, we extended the latter findings by investigating the following questions:
+Recent advancements in data science have catalyzed the development of predictive models for various problems, including political conflicts such as civil wars [[2]](#2) [[3]](#3) [[4]](#4). Despite multiple design errors in their study, Muchlinski _et al._  [[5]](#5) significantly improved civil war onset prediction using **Random Forests** (RFs), a decision tree-based machine learning algorithm. In this project, we extended the latter findings by investigating the following questions:
 
  * How does Muchlinski et al.'s model compare with other popular ML algorithms?
  * How does civil war prediction vary when training separate models for geographically-split datasets?
@@ -117,7 +117,7 @@ Beyond that, an interesting result was that feature importance differed staggeri
 
 * In **South and East Asia and Oceania**, the three most important features were **"% adult population illiterate"**, **"Fuel and oil product exports as % of merchandise exports"** and **"neighbors' average ln(GDP per capita)"**. The fact that fuel-related variables are important is consistent with the importance of coal in this region. For instance, China and Indonesia are among the top-5 countries in terms of coal exports [[9]](#9), and were impacted by several civil war events in the 20th century (China: Chinese Civil-War (1945-1949), Indonesia: Papua conflict since 1962).
 
-* In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdaron Civil War (1979-1992)) [[10]](#10). 
+* In **Latin America**, military manpower and children mortality were staggeringly more important than the other variables. Interestingly, the first feature is specifically high in this region. A possible explanation for this feature is the fact that military institutions were often deeply intertwined with political affairs in Latin American countries (e.g., Costa Rican Civil War (1948), Salvdoran Civil War (1979-1992)) [[10]](#10). 
 
 * In **Subsaharan Africa**, primary commodity exports/GDP was by far the most critical variable. This results is somewhat consistent with previous analyses by Collier and Hoeffler who found that a high percent of primary commodity exports as a function of GDP was a strong risk factor of civil war onset in Africa [[3]](#3).
  
@@ -150,7 +150,7 @@ Overall, these results remain arguably worse than during the two previous steps.
 **Conclusion:** Time-series forecasting of civil war onset with this data was unsuccessful. Further research for this task could be performed with larger datasets to be able to harness the power of RNNs.
 
 # Conclusion
-All in all, we have seen that XGBoost outperformed Random Forests and MLPs in the binary classification of civil war onset. While geographically separated modelling did not improve predictive ability, it remained interesting to see that feature important somewhat coincided with the historical specificities of each geographical region. At last, more work has to be done to improve time-series forecasting of rare events such as civil war onset.
+All in all, we have seen that XGBoost outperformed Random Forests and MLPs in the binary classification of civil war onset. While geographically separated modelling did not improve predictive ability, it remained interesting to see that feature importance somewhat coincided with the historical specificities of each geographical region. At last, more work has to be done to improve time-series forecasting of rare events such as civil war onset.
 
 # References
 <a id="1">[1]</a> Pettersson, T., & Öberg, M. (2020). Organized violence, 1989–2019. _Journal of peace research_, 57(4), 597-613. <a href="https://journals.sagepub.com/doi/pdf/10.1177/0022343320934986">link</a>
